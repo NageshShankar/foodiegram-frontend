@@ -1,0 +1,266 @@
+.restaurant-detail-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.85);
+    backdrop-filter: blur(10px);
+    z-index: 1000;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+    animation: fadeIn 0.3s ease;
+}
+
+.restaurant-detail-card {
+    background: #111;
+    color: #fff;
+    width: 100%;
+    max-width: 450px;
+    max-height: 85vh;
+    border-radius: 24px;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    overflow: hidden;
+    /* Let the internal container scroll */
+}
+
+.card-scroll-content {
+    padding: 30px 24px;
+    overflow-y: auto;
+    flex: 1;
+    scrollbar-width: thin;
+    scrollbar-color: rgba(255, 255, 255, 0.2) transparent;
+}
+
+.card-scroll-content::-webkit-scrollbar {
+    width: 6px;
+}
+
+.card-scroll-content::-webkit-scrollbar-thumb {
+    background: rgba(255, 255, 255, 0.2);
+    border-radius: 10px;
+}
+
+.close-btn {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    background: rgba(255, 255, 255, 0.1);
+    border: none;
+    color: #fff;
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    font-size: 20px;
+    cursor: pointer;
+}
+
+.detail-header {
+    margin-bottom: 24px;
+    text-align: center;
+}
+
+.detail-name {
+    font-size: 28px;
+    font-weight: 800;
+    letter-spacing: -0.5px;
+}
+
+.verified-badge-pill-mini {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    margin-left: 8px;
+    color: var(--color-primary, #FACC15);
+    background: rgba(250, 204, 21, 0.1);
+    padding: 3px;
+    border-radius: 50%;
+    font-size: 16px;
+    vertical-align: middle;
+    transform: translateY(-2px);
+    filter: drop-shadow(0 0 10px rgba(250, 204, 21, 0.2));
+}
+
+.verified-badge-pill-mini svg {
+    display: block;
+}
+
+.detail-section {
+    margin-bottom: 24px;
+}
+
+.section-label {
+    font-size: 12px;
+    font-weight: 800;
+    color: var(--color-text-dim, #888);
+    letter-spacing: 1px;
+    margin-bottom: 12px;
+    text-transform: uppercase;
+}
+
+.image-scroll-grid {
+    display: flex;
+    gap: 12px;
+    overflow-x: auto;
+    padding-bottom: 10px;
+    scrollbar-width: none;
+}
+
+.image-scroll-grid::-webkit-scrollbar {
+    display: none;
+}
+
+.detail-image {
+    width: 200px;
+    height: 140px;
+    object-fit: cover;
+    border-radius: 12px;
+    background: #222;
+    flex-shrink: 0;
+}
+
+.detail-description {
+    font-size: 15px;
+    line-height: 1.6;
+    color: #ccc;
+}
+
+.detail-actions {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    padding: 0 24px 24px;
+    margin-top: 10px;
+}
+
+.platform-btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 12px;
+    padding: 14px;
+    border-radius: 12px;
+    text-decoration: none;
+    font-weight: 700;
+    font-size: 14px;
+    transition: transform 0.2s ease;
+}
+
+.platform-btn:hover {
+    transform: translateY(-2px);
+}
+
+.platform-btn img {
+    height: 20px;
+}
+
+.platform-btn.zomato {
+    background: #E23744;
+    color: #fff;
+}
+
+.platform-btn.swiggy {
+    background: #FC8019;
+    color: #fff;
+}
+
+.no-data {
+    font-style: italic;
+    font-size: 13px;
+    color: #555;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: scale(0.95);
+    }
+
+    to {
+        opacity: 1;
+        transform: scale(1);
+    }
+}
+
+/* --- DETAIL SLIDESHOW (MINI) --- */
+.detail-slideshow {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.slideshow-main-mini {
+    position: relative;
+    width: 100%;
+    aspect-ratio: 4/3;
+    border-radius: 16px;
+    overflow: hidden;
+    background: #0c0c0c;
+    border: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.detail-slide-image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    animation: fadeIn 0.4s ease;
+}
+
+.mini-nav {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    background: rgba(0, 0, 0, 0.5);
+    backdrop-filter: blur(5px);
+    color: #fff;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    font-size: 18px;
+    transition: all 0.2s;
+}
+
+.mini-nav:hover {
+    background: #fff;
+    color: #000;
+}
+
+.mini-nav.prev {
+    left: 12px;
+}
+
+.mini-nav.next {
+    right: 12px;
+}
+
+.mini-dots {
+    display: flex;
+    justify-content: center;
+    gap: 6px;
+}
+
+.mini-dot {
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.2);
+    cursor: pointer;
+    transition: all 0.3s;
+}
+
+.mini-dot.active {
+    background: var(--color-primary, #FACC15);
+    width: 18px;
+    border-radius: 6px;
+}

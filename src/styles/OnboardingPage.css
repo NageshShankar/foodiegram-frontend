@@ -1,0 +1,260 @@
+/* OnboardingPage.css */
+/* Dark Theme */
+.onboarding-container {
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    /* Better for scrollable content */
+    min-height: 100vh;
+    overflow-y: auto;
+    background-color: #000;
+    color: #fff;
+    font-family: 'Inter', sans-serif;
+    padding: 60px 20px;
+    /* More vertical padding for scrolling space */
+}
+
+.onboarding-layout-wrapper {
+    padding-left: 244px;
+    width: 100%;
+}
+
+@media (max-width: 1024px) {
+    .onboarding-layout-wrapper {
+        padding-left: 80px;
+    }
+}
+
+@media (max-width: 768px) {
+    .onboarding-layout-wrapper {
+        padding-left: 0;
+        padding-bottom: 70px;
+    }
+}
+
+.onboarding-card {
+    background-color: #111;
+    border: 1px solid #333;
+    padding: 2.5rem;
+    border-radius: 16px;
+    width: 100%;
+    max-width: 550px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+}
+
+.params-header {
+    margin-bottom: 2.5rem;
+    text-align: center;
+}
+
+.params-header h2 {
+    font-size: 1.8rem;
+    font-weight: 800;
+    letter-spacing: -1px;
+}
+
+.step-indicator {
+    font-size: 0.85rem;
+    color: #FFD700;
+    margin-top: 0.6rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+.section-header {
+    margin-bottom: 2rem;
+}
+
+.section-header h3 {
+    font-size: 1.4rem;
+    margin-bottom: 0.4rem;
+}
+
+.section-header p {
+    color: #888;
+    font-size: 0.95rem;
+}
+
+.error-message {
+    color: #ff4d4d;
+    background: rgba(255, 77, 77, 0.1);
+    padding: 12px;
+    border-radius: 8px;
+    margin-bottom: 1.5rem;
+    text-align: center;
+    border: 1px solid rgba(255, 77, 77, 0.2);
+}
+
+.input-field {
+    margin-bottom: 1.5rem;
+}
+
+.input-field label {
+    display: block;
+    margin-bottom: 0.6rem;
+    font-size: 0.9rem;
+    font-weight: 600;
+    color: #aaa;
+}
+
+.input-field input {
+    width: 100%;
+    padding: 14px;
+    background: #1a1a1a;
+    border: 1px solid #333;
+    border-radius: 8px;
+    color: #fff;
+    font-size: 1rem;
+    transition: all 0.2s;
+}
+
+.input-field input:focus {
+    border-color: #FFD700;
+    background: #222;
+    outline: none;
+    box-shadow: 0 0 0 4px rgba(255, 215, 0, 0.1);
+}
+
+.input-field small {
+    display: block;
+    margin-top: 0.5rem;
+    color: #666;
+    font-size: 0.8rem;
+}
+
+.actions-row {
+    display: flex;
+    gap: 1rem;
+    margin-top: 2rem;
+}
+
+.btn-primary {
+    flex: 2;
+    padding: 16px;
+    background: #FFD700;
+    color: #000;
+    border: none;
+    border-radius: 10px;
+    font-weight: 800;
+    cursor: pointer;
+    font-size: 1rem;
+    transition: all 0.2s;
+}
+
+.btn-primary:hover:not(:disabled) {
+    background: #E5C100;
+    transform: translateY(-2px);
+}
+
+.btn-secondary {
+    flex: 1;
+    padding: 16px;
+    background: #222;
+    color: #fff;
+    border: 1px solid #333;
+    border-radius: 10px;
+    font-weight: 600;
+    cursor: pointer;
+}
+
+.btn-secondary:hover {
+    background: #2a2a2a;
+    border-color: #444;
+}
+
+.verification-pending-state {
+    text-align: center;
+    padding: 20px 0;
+}
+
+.success-icon {
+    font-size: 4rem;
+    margin-bottom: 1.5rem;
+    display: block;
+}
+
+.verification-pending-state h3 {
+    font-size: 1.8rem;
+    margin-bottom: 1rem;
+}
+
+.verification-pending-state p {
+    color: #ccc;
+    line-height: 1.6;
+    margin-bottom: 1rem;
+}
+
+.verification-pending-state .note {
+    font-size: 0.9rem;
+    color: #FFD700;
+    background: rgba(255, 215, 0, 0.1);
+    padding: 12px;
+    border-radius: 8px;
+    margin-top: 1.5rem;
+}
+
+/* Pricing Strategy Step */
+.mode-selection-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1.5rem;
+    margin-top: 2rem;
+}
+
+.mode-card {
+    background: #1a1a1a;
+    border: 2px solid #333;
+    padding: 2rem 1.5rem;
+    border-radius: 16px;
+    text-align: center;
+    cursor: pointer;
+    transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1rem;
+    color: #fff;
+}
+
+.mode-card:hover {
+    border-color: #555;
+    transform: translateY(-5px);
+    background: #222;
+}
+
+.mode-card.active {
+    border-color: #FFD700;
+    background: rgba(255, 215, 0, 0.05);
+}
+
+.mode-icon {
+    font-size: 2.5rem;
+    background: #222;
+    width: 64px;
+    height: 64px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    margin-bottom: 0.5rem;
+}
+
+.mode-card h4 {
+    font-size: 1.1rem;
+    font-weight: 700;
+    margin: 0;
+}
+
+.mode-card p {
+    font-size: 0.8rem;
+    color: #888;
+    margin: 0;
+    line-height: 1.4;
+}
+
+@media (max-width: 480px) {
+    .mode-selection-grid {
+        grid-template-columns: 1fr;
+    }
+}

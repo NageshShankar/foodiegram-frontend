@@ -1,0 +1,173 @@
+/* =====================================================
+   MINIMALISTIC CHECKOUT PAGE (BLACK & YELLOW)
+   ===================================================== */
+
+.checkout-page {
+  min-height: 100vh;
+  background-color: var(--color-bg-primary);
+  color: var(--color-text-primary);
+  padding: 60px 20px;
+  display: block;
+}
+
+.checkout-layout-wrapper {
+  padding-left: 244px;
+  width: 100%;
+}
+
+@media (max-width: 1024px) {
+  .checkout-layout-wrapper {
+    padding-left: 80px;
+  }
+}
+
+@media (max-width: 768px) {
+  .checkout-layout-wrapper {
+    padding-left: 0;
+    padding-bottom: 70px;
+  }
+}
+
+.checkout-header {
+  text-align: center;
+  margin-bottom: 60px;
+}
+
+.checkout-header h1 {
+  font-size: 42px;
+  font-weight: 900;
+  color: var(--color-primary);
+  letter-spacing: -2px;
+  margin-bottom: 8px;
+}
+
+.checkout-subtitle {
+  font-size: 16px;
+  color: var(--color-text-secondary);
+}
+
+.checkout-content {
+  max-width: 900px;
+  margin: 0 auto;
+}
+
+/* Grouped Restaurant Cards */
+.restaurant-group-card {
+  background: var(--color-bg-secondary);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-lg);
+  padding: 30px;
+  margin-bottom: 30px;
+}
+
+.restaurant-name {
+  font-size: 28px;
+  font-weight: 900;
+  color: var(--color-primary);
+  margin-bottom: 24px;
+  border-bottom: 2px solid var(--color-border);
+  padding-bottom: 12px;
+}
+
+.grouped-items {
+  margin-bottom: 30px;
+}
+
+.grouped-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 12px 0;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.item-main {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.item-name {
+  font-size: 18px;
+  font-weight: 700;
+}
+
+.item-platform-tag {
+  font-size: 11px;
+  background: rgba(255, 255, 255, 0.1);
+  padding: 2px 8px;
+  border-radius: 4px;
+  text-transform: uppercase;
+}
+
+.item-price-info {
+  text-align: right;
+}
+
+.item-qty {
+  color: var(--color-text-secondary);
+  margin-right: 12px;
+}
+
+.item-price {
+  font-weight: 800;
+  font-size: 18px;
+}
+
+.checkout-actions {
+  display: flex;
+  gap: 16px;
+}
+
+.platform-checkout-btn {
+  flex: 1;
+  padding: 16px;
+  border-radius: var(--radius-md);
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  transition: all 0.2s ease;
+}
+
+.platform-checkout-btn.zomato {
+  background: #E23744;
+  color: #fff;
+}
+
+.platform-checkout-btn.swiggy {
+  background: #FC8019;
+  color: #fff;
+}
+
+.platform-checkout-btn:hover {
+  transform: translateY(-2px);
+  filter: brightness(1.1);
+}
+
+.platform-checkout-btn.disabled {
+  background: #2a2a2a !important;
+  color: #666 !important;
+  cursor: not-allowed;
+  transform: none !important;
+  filter: none !important;
+  border: 1px solid #444;
+}
+
+.platform-checkout-btn.disabled:hover {
+  transform: none !important;
+  filter: none !important;
+}
+
+.back-btn {
+  background: none;
+  font-size: 24px;
+  color: var(--color-text-primary);
+  margin-bottom: 20px;
+}
+
+.loading {
+  text-align: center;
+  padding: 100px;
+  font-size: 20px;
+  color: var(--color-primary);
+}

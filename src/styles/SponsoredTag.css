@@ -1,0 +1,10 @@
+.sponsored-tag {
+  background: #565449; /* Olive Drab */
+  color: #FFFBF4; /* Floral White */
+  padding: 5px 10px;
+  border-radius: 5px;
+  font-size: 12px;
+  font-weight: bold;
+  display: inline-block;
+  margin-bottom: 10px;
+}

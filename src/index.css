@@ -1,0 +1,52 @@
+/* ===========================
+   GLOBAL RESET
+   =========================== */
+body {
+  margin: 0;
+  font-family: 'Inter', system-ui, -apple-system, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  background-color: #050505;
+  /* Match global.css base */
+  color: #ffffff;
+}
+
+code {
+  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
+    monospace;
+}
+
+/* ===========================
+   GLOBAL APP THEME FIX
+   =========================== */
+
+html,
+body,
+#root,
+.app {
+  min-height: 100%;
+}
+
+/* Force Dark Mode Default */
+:root {
+  color-scheme: dark;
+}
+
+/* Scrollbar Styles (Fallback if global.css fails) */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+
+::-webkit-scrollbar-track {
+  background: #050505;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #333;
+  border-radius: 3px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #444;
+}

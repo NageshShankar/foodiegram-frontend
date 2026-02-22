@@ -1,0 +1,42 @@
+/* =====================================================
+   EXPERT CART NOTIFICATION (BLACK & YELLOW)
+   ===================================================== */
+
+.cart-notification {
+  position: fixed;
+  bottom: 120px;
+  left: 50%;
+  transform: translateX(-50%);
+
+  /* Glassmorphism */
+  background: var(--color-bg-glass);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+
+  color: #fff;
+  padding: 12px 24px;
+  border-radius: var(--radius-full);
+  display: flex;
+  align-items: center;
+  gap: 12px;
+
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  box-shadow: 0 20px 40px -10px rgba(0, 0, 0, 0.8);
+  z-index: 2000;
+
+  animation: slideUpFade 0.5s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+.notification-icon {
+  font-size: 24px;
+  color: var(--color-primary);
+  display: flex;
+  align-items: center;
+}
+
+.cart-notification span {
+  font-size: 14px;
+  font-weight: 700;
+  color: var(--color-text-main);
+  letter-spacing: 0.5px;
+}

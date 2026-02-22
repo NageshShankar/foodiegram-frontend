@@ -1,0 +1,6 @@
+- [x] Add scroll buttons to HomePage.jsx
+- [x] Implement scroll logic with useRef, useState, useEffect
+- [x] Add wheel event listener with debouncing
+- [x] Add scroll up/down functions using scrollIntoView
+- [x] Ensure buttons are position: fixed
+- [x] Test the implementation

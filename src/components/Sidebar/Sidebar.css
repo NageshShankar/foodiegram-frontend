@@ -1,0 +1,281 @@
+/* =====================================================
+   EXPERT MINIMALIST SIDEBAR (MODERN GLASS)
+   ===================================================== */
+
+.sidebar {
+  width: 244px;
+  /* Slightly narrower for a sleeker look */
+  height: 100vh;
+  background: rgba(10, 10, 10, 0.95);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border-right: 1px solid rgba(255, 255, 255, 0.08);
+  /* Subtle border */
+  display: flex;
+  flex-direction: column;
+  padding: 24px 12px;
+  position: fixed;
+  left: 0;
+  top: 0;
+  z-index: 1000;
+  transition: all var(--transition-base, 0.3s ease);
+}
+
+/* Background Ambience */
+.sidebar-bg-effect {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 400px;
+  background: radial-gradient(circle at top left, rgba(250, 204, 21, 0.08), transparent 70%);
+  pointer-events: none;
+  z-index: -1;
+}
+
+/* Brand Section */
+.sidebar-header {
+  margin-bottom: 40px;
+  padding: 0 16px;
+}
+
+.logo-container {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  cursor: pointer;
+  transition: opacity 0.2s ease;
+}
+
+.logo-container:hover {
+  opacity: 0.9;
+}
+
+.sidebar-logo-image {
+  width: 50px;
+  height: 50px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+}
+
+.brand-logo-img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  filter: drop-shadow(0 0 8px rgba(250, 204, 21, 0.2));
+}
+
+.sidebar-logo-text {
+  display: flex;
+  flex-direction: column;
+}
+
+.logo-main {
+  font-size: 22px;
+  font-family: 'Outfit', sans-serif;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  background: linear-gradient(135deg, #fff 0%, #ccc 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+/* Navigation Section */
+.sidebar-nav {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  flex: 1;
+}
+
+/* Sidebar Item */
+.sidebar-item {
+  position: relative;
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  padding: 14px 16px;
+  border-radius: 12px;
+  color: #a3a3a3;
+  text-decoration: none;
+  font-weight: 500;
+  font-size: 16px;
+  transition: all 0.2s ease;
+  cursor: pointer;
+  border: none;
+  background: transparent;
+  width: 100%;
+  text-align: left;
+  outline: none;
+}
+
+.sidebar-item:hover {
+  color: #fff;
+  background: rgba(255, 255, 255, 0.05);
+  transform: translateX(4px);
+}
+
+.sidebar-item.active {
+  color: #fff;
+  background: rgba(255, 255, 255, 0.1);
+  font-weight: 600;
+}
+
+.sidebar-item .icon {
+  font-size: 24px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: transform 0.2s ease;
+}
+
+.sidebar-item:hover .icon {
+  transform: scale(1.1);
+  color: var(--color-primary, #FACC15);
+}
+
+.sidebar-item.active .icon {
+  color: var(--color-primary, #FACC15);
+}
+
+/* Active Indicator */
+.active-indicator {
+  position: absolute;
+  left: 0;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 4px;
+  height: 24px;
+  background: var(--color-primary, #FACC15);
+  border-radius: 0 4px 4px 0;
+  box-shadow: 0 0 10px rgba(250, 204, 21, 0.6);
+}
+
+/* Footer (Logout) */
+.sidebar-footer {
+  margin-top: auto;
+  padding-top: 20px;
+  border-top: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+/* Logout Button */
+.logout-btn {
+  color: #ef4444;
+}
+
+.logout-btn:hover {
+  background: rgba(239, 68, 68, 0.1);
+  color: #ef4444;
+}
+
+.logout-btn .icon {
+  color: #ef4444;
+}
+
+/* Responsive States */
+@media (max-width: 1024px) {
+  .sidebar {
+    width: 80px;
+    padding: 24px 12px;
+  }
+
+  .sidebar-logo-text,
+  .sidebar-item .label {
+    display: none;
+  }
+
+  .sidebar-header {
+    padding: 0;
+    display: flex;
+    justify-content: center;
+  }
+
+  .sidebar-item {
+    justify-content: center;
+    padding: 16px;
+  }
+
+  .sidebar-item:hover {
+    transform: none;
+  }
+}
+
+@media (max-width: 768px) {
+  .sidebar {
+    width: 100vw;
+    height: 70px;
+    bottom: 0;
+    top: auto;
+    left: 0;
+    flex-direction: row;
+    padding: 0 10px;
+    border-right: none;
+    border-top: 1px solid rgba(255, 255, 255, 0.08);
+    background: rgba(10, 10, 10, 0.95);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    justify-content: center;
+    align-items: center;
+    z-index: 2100;
+    /* Above cart overlay if needed */
+  }
+
+  .sidebar-header,
+  .sidebar-footer,
+  .sidebar-bg-effect,
+  .sidebar-gradient-orb {
+    display: none !important;
+  }
+
+  .sidebar-nav {
+    flex-direction: row;
+    width: 100%;
+    justify-content: space-around;
+    gap: 0;
+    margin: 0;
+  }
+
+  .sidebar-item {
+    width: auto;
+    flex: 1;
+    padding: 10px;
+    flex-direction: column;
+    gap: 4px;
+    justify-content: center;
+    border-radius: 0;
+    transform: none !important;
+  }
+
+  .sidebar-item .icon {
+    font-size: 24px;
+  }
+
+  .sidebar-item .label {
+    display: block !important;
+    font-size: 10px;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    margin-top: 2px;
+  }
+
+  .sidebar-item:hover {
+    background: transparent;
+  }
+
+  .sidebar-item.active {
+    background: transparent;
+  }
+
+  .active-indicator {
+    width: 20px;
+    height: 3px;
+    left: 50%;
+    bottom: -6px;
+    top: auto;
+    transform: translateX(-50%);
+    border-radius: 4px 4px 0 0;
+  }
+}
