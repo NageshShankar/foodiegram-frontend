@@ -9,8 +9,10 @@ export const getAssetUrl = (path) => {
     return `${ASSET_BASE_URL}${normalizedPath}`;
 };
 
-export default {
+const config = {
     API_BASE_URL,
     ASSET_BASE_URL,
     getAssetUrl
 };
+
+export default config;

@@ -2,7 +2,6 @@ import React from "react";
 import { useNavigate, useLocation } from "react-router-dom";
 import { useAuth } from "../../context/AuthContext";
 import { IoHomeOutline, IoHome, IoSearchOutline, IoSearch, IoAddCircleOutline, IoAddCircle, IoPersonOutline, IoPerson, IoLogOutOutline, IoBookmarkOutline, IoBookmark } from "react-icons/io5";
-import { RiRestaurantLine } from "react-icons/ri";
 import "./Sidebar.css";
 
 export default function Sidebar() {

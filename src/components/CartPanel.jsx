@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import { useNavigate } from "react-router-dom"; // ✅ ADD THIS
 import { useCart } from "../context/CartContext";
 import { IoCartOutline, IoClose, IoAdd, IoRemove, IoTrashOutline, IoFastFoodOutline } from "react-icons/io5";
@@ -11,8 +11,7 @@ const Cart = ({ isOpen, onClose }) => {
     removeFromCart,
     increaseQuantity,
     decreaseQuantity,
-    clearCart,
-    totalPrice
+    clearCart
   } = useCart();
 
   const handleProceedToCheckout = () => {

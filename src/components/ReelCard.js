@@ -9,7 +9,7 @@ import { useFollow } from "../context/FollowContext";
 import { useAuth } from "../context/AuthContext";
 import { useSaved } from "../context/SavedContext";
 import RestaurantDetailCard from "./RestaurantDetailCard";
-import { IoHeart, IoHeartOutline, IoChatbubbleEllipsesOutline, IoCartOutline, IoLocationSharp, IoPlay, IoPause, IoVolumeHighOutline, IoVolumeMuteOutline, IoPersonAddOutline, IoCheckmarkDoneOutline, IoCheckmarkCircle, IoBookmark, IoBookmarkOutline } from "react-icons/io5";
+import { IoHeart, IoHeartOutline, IoChatbubbleEllipsesOutline, IoCartOutline, IoLocationSharp, IoPlay, IoVolumeHighOutline, IoVolumeMuteOutline, IoPersonAddOutline, IoCheckmarkDoneOutline, IoCheckmarkCircle, IoBookmark, IoBookmarkOutline } from "react-icons/io5";
 import "../styles/ReelCard.css";
 
 export default function ReelCard({ reel, active, onComment }) {
