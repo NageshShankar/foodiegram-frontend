@@ -11,6 +11,7 @@ export default function LoginPage() {
   const [password, setPassword] = useState("");
   const [message, setMessage] = useState("");
   const [isForgotPassword, setIsForgotPassword] = useState(false);
+  const [demoResetUrl, setDemoResetUrl] = useState("");
 
   const { user, login, googleLogin, forgotPassword } = useAuth();
   const navigate = useNavigate();
@@ -61,8 +62,9 @@ export default function LoginPage() {
     }
     const result = await forgotPassword(email);
     if (result.success) {
-      setMessage("Password reset link sent to your email!");
-      setIsForgotPassword(false);
+      setMessage("Demo Mode: Reset link generated!");
+      setDemoResetUrl(result.resetUrl);
+      // Don't close immediately so they can see the link
     } else {
       setMessage(result.error);
     }
@@ -177,9 +179,34 @@ export default function LoginPage() {
                 <button className="submit-btn" onClick={handleForgotPassword}>
                   Send Reset Link
                 </button>
+
+                {demoResetUrl && (
+                  <div style={{
+                    marginTop: "15px",
+                    padding: "12px",
+                    background: "rgba(0,0,0,0.05)",
+                    border: "1px dashed var(--color-primary)",
+                    borderRadius: "12px",
+                    textAlign: "center"
+                  }}>
+                    <p style={{ margin: "0 0 8px", fontSize: "12px", fontWeight: "bold" }}>⚡ DEMO VERSION</p>
+                    <p style={{ margin: "0 0 10px", fontSize: "11px", color: "#666" }}>Email sending is disabled. Use the link below:</p>
+                    <button
+                      className="submit-btn"
+                      style={{ background: "#000", fontSize: "12px", padding: "8px" }}
+                      onClick={() => window.location.href = demoResetUrl}
+                    >
+                      Reset Password Now
+                    </button>
+                  </div>
+                )}
+
                 <p className="toggle-link">
                   Remember password?{" "}
-                  <Link to="#" onClick={() => setIsForgotPassword(false)}>Back to Login</Link>
+                  <Link to="#" onClick={() => {
+                    setIsForgotPassword(false);
+                    setDemoResetUrl("");
+                  }}>Back to Login</Link>
                 </p>
               </div>
             ) : (

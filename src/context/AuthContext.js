@@ -109,8 +109,11 @@ export const AuthProvider = ({ children }) => {
 
   const forgotPassword = async (email) => {
     try {
-      await api.post('/auth/forgot-password', { email });
-      return { success: true };
+      const response = await api.post('/auth/forgot-password', { email });
+      return {
+        success: true,
+        resetUrl: response.data.resetUrl // Captured for demo mode
+      };
     } catch (error) {
       console.error("Forgot password error:", error);
       return {
