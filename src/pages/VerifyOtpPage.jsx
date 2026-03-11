@@ -50,23 +50,43 @@ export default function VerifyOtpPage() {
 
                 <form onSubmit={handleVerify}>
                     <div className="step-content animate-blur">
-                        <div className="input-group" style={{ gridTemplateColumns: '1fr' }}>
-                            <input
-                                type="text"
-                                placeholder="000000"
-                                value={otp}
-                                onChange={(e) => setOtp(e.target.value.replace(/\D/g, ""))}
-                                maxLength={6}
-                                style={{
-                                    textAlign: 'center',
-                                    fontSize: '32px',
-                                    letterSpacing: '12px',
-                                    fontWeight: 'bold',
-                                    padding: '15px'
-                                }}
-                                required
-                                autoFocus
-                            />
+                        <div className="input-group" style={{ gridTemplateColumns: '1fr', marginBottom: '20px' }}>
+                            <div style={{ position: 'relative' }}>
+                                <input
+                                    type="text"
+                                    placeholder="000000"
+                                    value={otp}
+                                    onChange={(e) => setOtp(e.target.value.replace(/\D/g, ""))}
+                                    maxLength={6}
+                                    style={{
+                                        width: '100%',
+                                        textAlign: 'center',
+                                        fontSize: '42px',
+                                        letterSpacing: '20px',
+                                        fontWeight: '900',
+                                        padding: '25px',
+                                        background: 'rgba(255,255,255,0.03)',
+                                        border: '1px solid rgba(255,255,255,0.1)',
+                                        borderRadius: '20px',
+                                        color: 'var(--color-primary)',
+                                        fontFamily: "'Courier New', Courier, monospace",
+                                        boxShadow: 'inset 0 4px 12px rgba(0,0,0,0.2)'
+                                    }}
+                                    required
+                                    autoFocus
+                                />
+                                <div style={{
+                                    position: 'absolute',
+                                    bottom: '10px',
+                                    left: '50%',
+                                    transform: 'translateX(-50%)',
+                                    fontSize: '10px',
+                                    textTransform: 'uppercase',
+                                    letterSpacing: '2px',
+                                    color: '#555',
+                                    fontWeight: '800'
+                                }}>Enter 6-Digit Code</div>
+                            </div>
                         </div>
 
                         {demoOtp && (

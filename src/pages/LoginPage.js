@@ -16,6 +16,25 @@ export default function LoginPage() {
   const { user, login, googleLogin, forgotPassword } = useAuth();
   const navigate = useNavigate();
 
+  const handleDemoLogin = async (demoEmail) => {
+    setMessage("Auto-logging into demo account...");
+    const result = await login(demoEmail, "password123");
+    if (result.success) {
+      const loggedUser = result.user;
+      if (result.nextStep === "RESTAURANT_DETAILS") {
+        navigate("/creator/setup-restaurant");
+      } else if (result.nextStep === "VERIFICATION_PENDING") {
+        navigate("/creator/verification-pending");
+      } else if (loggedUser?.role === "CREATOR" && loggedUser?.isAdminVerified === false) {
+        navigate("/profile");
+      } else {
+        navigate("/home");
+      }
+    } else {
+      setMessage(result.error);
+    }
+  };
+
   React.useEffect(() => {
     if (user) {
       navigate("/home");
@@ -270,44 +289,42 @@ export default function LoginPage() {
               </p>
               <div style={{ display: "flex", gap: "10px" }}>
                 <button
-                  onClick={() => {
-                    setEmail("demo.creator@example.com");
-                    setPassword("password123");
-                  }}
+                  onClick={() => handleDemoLogin("demo.creator@example.com")}
                   style={{
                     flex: 1,
-                    padding: "8px",
+                    padding: "10px",
                     fontSize: "11px",
-                    borderRadius: "8px",
+                    fontWeight: "700",
+                    borderRadius: "10px",
                     background: "#000",
                     color: "#fff",
                     border: "none",
-                    cursor: "pointer"
+                    cursor: "pointer",
+                    transition: "all 0.2s ease"
                   }}
                 >
                   Demo Creator
                 </button>
                 <button
-                  onClick={() => {
-                    setEmail("demo.user@example.com");
-                    setPassword("password123");
-                  }}
+                  onClick={() => handleDemoLogin("demo.user@example.com")}
                   style={{
                     flex: 1,
-                    padding: "8px",
+                    padding: "10px",
                     fontSize: "11px",
-                    borderRadius: "8px",
+                    fontWeight: "700",
+                    borderRadius: "10px",
                     background: "#fff",
                     color: "#000",
                     border: "1px solid #000",
-                    cursor: "pointer"
+                    cursor: "pointer",
+                    transition: "all 0.2s ease"
                   }}
                 >
                   Demo User
                 </button>
               </div>
-              <p style={{ margin: "8px 0 0", fontSize: "10px", color: "#999", textAlign: "center" }}>
-                Click to auto-fill credentials
+              <p style={{ margin: "10px 0 0", fontSize: "10px", color: "#999", textAlign: "center", fontStyle: "italic" }}>
+                ⚡ Click for instant one-click access
               </p>
             </div>
 
