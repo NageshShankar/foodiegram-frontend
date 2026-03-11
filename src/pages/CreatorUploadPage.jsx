@@ -48,9 +48,10 @@ export default function CreatorUploadPage() {
     return <Navigate to="/home" replace />;
   }
 
-  const isVerified = user?.isAdminVerified;
+  const isDemo = user?.email === 'demo.creator@example.com';
+  const isVerified = user?.isAdminVerified || isDemo;
 
-  const isSetupComplete = (profileStatus?.setupCompleted === true) || (user?.email === 'demo.creator@example.com');
+  const isSetupComplete = (profileStatus?.setupCompleted === true) || isDemo;
   const isPosMode = profileStatus?.priceMode === 'POS';
   const isManualMode = profileStatus?.priceMode === 'MANUAL';
 
