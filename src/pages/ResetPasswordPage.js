@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { useParams, useNavigate } from "react-router-dom";
+import { useParams, useNavigate, Link } from "react-router-dom";
 import { useAuth } from "../context/AuthContext";
 import "../styles/LoginPage.css"; // Reuse login styles
 
@@ -45,7 +45,13 @@ export default function ResetPasswordPage() {
                 <div className="form-container" style={{ maxWidth: '450px' }}>
                     <div className="form-content">
                         <div className="header-group">
-                            <h1 className="form-title">Reset Password</h1>
+                            <Link to="/home">
+                                <img
+                                    src="/assets/logo_new.png"
+                                    alt="Foodiegram Logo"
+                                    className="login-brand-logo"
+                                />
+                            </Link>
                         </div>
 
                         {message && (

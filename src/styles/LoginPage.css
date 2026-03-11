@@ -201,13 +201,26 @@
   gap: 12px;
 }
 
+.login-brand-logo {
+  max-height: 85px;
+  width: auto;
+  filter: drop-shadow(0 0 10px rgba(250, 204, 21, 0.2));
+  transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  cursor: pointer;
+  display: block;
+}
+
+.login-brand-logo:hover {
+  transform: scale(1.08) rotate(1deg);
+  filter: drop-shadow(0 0 20px rgba(250, 204, 21, 0.4));
+}
+
 .form-title {
-  font-size: 42px;
-  /* Reduced from 56px for better fit */
+  font-size: 32px;
   font-weight: 900;
   color: #FACC15;
-  letter-spacing: -2px;
-  margin-top: 5px;
+  letter-spacing: -1px;
+  margin: 0;
   text-align: center;
   background: linear-gradient(to bottom, #FACC15, #EAB308);
   -webkit-background-clip: text;

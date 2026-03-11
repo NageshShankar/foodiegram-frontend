@@ -132,7 +132,13 @@ export default function LoginPage() {
         <div className="form-container">
           <div className="form-content">
             <div className="header-group">
-              <h1 className="form-title">Foodiegram</h1>
+              <Link to="/home">
+                <img
+                  src="/assets/logo_new.png"
+                  alt="Foodiegram Logo"
+                  className="login-brand-logo"
+                />
+              </Link>
             </div>
 
             {/* Role Selector */}
