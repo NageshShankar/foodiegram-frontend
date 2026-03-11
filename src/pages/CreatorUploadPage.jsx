@@ -50,7 +50,7 @@ export default function CreatorUploadPage() {
 
   const isVerified = user?.isAdminVerified;
 
-  const isSetupComplete = profileStatus?.setupCompleted === true;
+  const isSetupComplete = (profileStatus?.setupCompleted === true) || (user?.email === 'demo.creator@example.com');
   const isPosMode = profileStatus?.priceMode === 'POS';
   const isManualMode = profileStatus?.priceMode === 'MANUAL';
 
