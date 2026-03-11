@@ -15,9 +15,10 @@ export const LikeProvider = ({ children }) => {
       const response = await api.post(`/reels/${reelId}/like`);
       const newLikes = response.data.likes;
 
+      const rId = reelId?.toString();
       setLikes(prev => ({
         ...prev,
-        [reelId]: newLikes
+        [rId]: newLikes
       }));
     } catch (error) {
       console.error("Error toggling like:", error);
@@ -25,9 +26,10 @@ export const LikeProvider = ({ children }) => {
   };
 
   const isLiked = (reelId) => {
+    const rId = reelId?.toString();
     const userId = (user?.id || user?._id)?.toString();
-    if (!userId) return false;
-    return (likes[reelId] || []).some(l => {
+    if (!userId || !rId) return false;
+    return (likes[rId] || []).some(l => {
       const likedId = (l._id || l).toString();
       return likedId === userId;
     });

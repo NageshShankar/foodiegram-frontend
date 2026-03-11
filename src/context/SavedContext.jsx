@@ -11,12 +11,11 @@ export const SavedProvider = ({ children }) => {
     const toggleSave = async (reelId) => {
         if (!user) return;
 
-        const currentlySaved = !!savedReels[reelId];
-
+        const rId = reelId?.toString();
         // Optimistic Update
         setSavedReels(prev => ({
             ...prev,
-            [reelId]: !currentlySaved
+            [rId]: !currentlySaved
         }));
 
         try {
@@ -36,7 +35,8 @@ export const SavedProvider = ({ children }) => {
     };
 
     const isSaved = (reelId) => {
-        return !!savedReels[reelId];
+        const rId = reelId?.toString();
+        return !!savedReels[rId];
     };
 
     const setInitialSavedStatus = (reelsData) => {

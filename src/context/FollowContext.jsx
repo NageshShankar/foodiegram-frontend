@@ -11,14 +11,17 @@ export const FollowProvider = ({ children }) => {
   const toggleRestaurantFollow = async (restaurantId, currentStatus) => {
     if (!user) return { success: false, error: 'Please login to follow' };
 
+    const rId = restaurantId?.toString();
+    if (!rId) return { success: false, error: 'Invalid Restaurant ID' };
+
     // Optimistic UI update
     setLocalFollows(prev => ({
       ...prev,
-      [restaurantId]: !currentStatus
+      [rId]: !currentStatus
     }));
 
     try {
-      const endpoint = `/restaurants/${restaurantId}/${currentStatus ? 'unfollow' : 'follow'}`;
+      const endpoint = `/restaurants/${rId}/${currentStatus ? 'unfollow' : 'follow'}`;
       const method = currentStatus ? 'delete' : 'post';
 
       await api({
@@ -31,7 +34,7 @@ export const FollowProvider = ({ children }) => {
       // Revert optimistic update on error
       setLocalFollows(prev => ({
         ...prev,
-        [restaurantId]: currentStatus
+        [rId]: currentStatus
       }));
       console.error("Error toggling restaurant follow:", error);
       return { success: false, error: error.response?.data?.message || 'Action failed' };
@@ -39,8 +42,11 @@ export const FollowProvider = ({ children }) => {
   };
 
   const getFollowStatus = (restaurantId, backendStatus) => {
-    if (localFollows[restaurantId] !== undefined) {
-      return localFollows[restaurantId];
+    const rId = restaurantId?.toString();
+    if (!rId) return backendStatus;
+
+    if (localFollows[rId] !== undefined) {
+      return localFollows[rId];
     }
     return backendStatus;
   };

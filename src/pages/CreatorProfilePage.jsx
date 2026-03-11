@@ -5,12 +5,14 @@ import { IoCheckmarkCircle } from "react-icons/io5";
 import api from "../utils/api";
 import { getAssetUrl } from "../config";
 import Sidebar from "../components/Sidebar/Sidebar";
+import { useFollow } from "../context/FollowContext";
 import "../styles/CreatorProfile.css";
 
 export default function CreatorProfilePage() {
   const { id } = useParams();
   const navigate = useNavigate();
   const { user, refreshUser } = useAuth();
+  const { toggleRestaurantFollow, getFollowStatus } = useFollow();
 
   const isUnverifiedCreator = user?.role === "CREATOR" && !user?.isAdminVerified;
 
@@ -125,7 +127,7 @@ export default function CreatorProfilePage() {
       try {
         const res = await api.get(`/users/${user.id || user._id}/following`);
         const following = res.data.data || [];
-        const isFollowingProfile = following.some(f => (f._id || f.id) === restaurantId);
+        const isFollowingProfile = following.some(f => String(f._id || f.id) === String(restaurantId));
         setIsFollowing(isFollowingProfile);
       } catch (err) {
         console.error("Check follow error:", err);
@@ -146,15 +148,16 @@ export default function CreatorProfilePage() {
       navigate('/login');
       return;
     }
+    const restaurantId = profileUser?.restaurant?._id || profileUser?.restaurant?.id;
+    if (!restaurantId) return;
+
     try {
-      if (isFollowing) {
-        await api.delete(`/restaurants/${profileUser.restaurant._id || profileUser.restaurant.id}/unfollow`);
-        setIsFollowing(false);
-        setFollowCount(prev => prev - 1);
-      } else {
-        await api.post(`/restaurants/${profileUser.restaurant._id || profileUser.restaurant.id}/follow`);
-        setIsFollowing(true);
-        setFollowCount(prev => prev + 1);
+      const currentStatus = getFollowStatus(restaurantId, isFollowing);
+      const result = await toggleRestaurantFollow(restaurantId, currentStatus);
+
+      if (result.success) {
+        setIsFollowing(!currentStatus);
+        setFollowCount(prev => currentStatus ? prev - 1 : prev + 1);
       }
     } catch (err) {
       console.error("Follow error:", err);
