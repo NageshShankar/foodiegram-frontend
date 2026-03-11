@@ -70,17 +70,51 @@ export default function VerifyOtpPage() {
                         </div>
 
                         {demoOtp && (
-                            <div style={{
-                                marginTop: "20px",
-                                padding: "12px",
-                                background: "#f8f9fa",
-                                border: "1px dashed var(--color-primary)",
-                                borderRadius: "8px",
-                                textAlign: "center"
+                            <div className="demo-otp-box" style={{
+                                marginTop: "25px",
+                                padding: "15px",
+                                background: "#000",
+                                border: "1px solid var(--color-primary)",
+                                borderRadius: "14px",
+                                position: "relative",
+                                overflow: "hidden"
                             }}>
-                                <p style={{ margin: 0, fontWeight: "bold", fontSize: "14px" }}>
-                                    Demo Mode: Your OTP is <span style={{ color: "var(--color-primary)" }}>{demoOtp}</span>
-                                </p>
+                                <div style={{
+                                    position: "absolute",
+                                    top: 0,
+                                    right: 0,
+                                    padding: "2px 10px",
+                                    background: "var(--color-primary)",
+                                    color: "#000",
+                                    fontSize: "9px",
+                                    fontWeight: "900",
+                                    textTransform: "uppercase",
+                                    borderRadius: "0 0 0 10px"
+                                }}>Dev Config</div>
+
+                                <div style={{ display: "flex", alignItems: "center", gap: "10px" }}>
+                                    <div style={{
+                                        width: "40px",
+                                        height: "40px",
+                                        background: "rgba(250, 204, 21, 0.1)",
+                                        borderRadius: "10px",
+                                        display: "flex",
+                                        alignItems: "center",
+                                        justifyContent: "center",
+                                        fontSize: "20px"
+                                    }}>🛡️</div>
+                                    <div style={{ textAlign: "left" }}>
+                                        <p style={{ margin: 0, fontSize: "12px", color: "#888" }}>Auto-filled code:</p>
+                                        <p style={{
+                                            margin: 0,
+                                            fontSize: "20px",
+                                            fontWeight: "900",
+                                            color: "var(--color-primary)",
+                                            letterSpacing: "4px",
+                                            fontFamily: "monospace"
+                                        }}>{demoOtp}</p>
+                                    </div>
+                                </div>
                             </div>
                         )}
                     </div>

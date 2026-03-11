@@ -122,25 +122,88 @@ export default function SetupRestaurantPage() {
                                 <small>Must show the restaurant signage clearly</small>
                             </div>
 
-                            <div className="input-field">
-                                <label>Price Mode</label>
-                                <div className="price-mode-selector" style={{ display: 'flex', gap: '10px', marginTop: '5px' }}>
-                                    <button
-                                        type="button"
-                                        className={formData.priceMode === 'POS' ? 'btn-active' : 'btn-outline'}
+                            <div className="input-field" style={{ gridColumn: 'span 2' }}>
+                                <label style={{ marginBottom: '12px', display: 'block', fontWeight: '800' }}>Ordering & Pricing System</label>
+                                <div className="price-mode-cards" style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '15px' }}>
+                                    {/* POS Card */}
+                                    <div
+                                        className={`mode-card ${formData.priceMode === 'POS' ? 'selected' : ''}`}
                                         onClick={() => setFormData({ ...formData, priceMode: 'POS' })}
-                                        style={{ flex: 1, padding: '10px', borderRadius: '8px', cursor: 'pointer', border: '1px solid #ddd' }}
+                                        style={{
+                                            padding: '24px',
+                                            borderRadius: '20px',
+                                            border: formData.priceMode === 'POS' ? '2px solid var(--color-primary)' : '1px solid rgba(255,255,255,0.1)',
+                                            background: '#000',
+                                            color: '#fff',
+                                            cursor: 'pointer',
+                                            transition: 'all 0.3s cubic-bezier(0.4, 0, 0.2, 1)',
+                                            display: 'flex',
+                                            flexDirection: 'column',
+                                            gap: '12px',
+                                            boxShadow: formData.priceMode === 'POS' ? '0 0 20px rgba(250, 204, 21, 0.15)' : 'none',
+                                            transform: formData.priceMode === 'POS' ? 'translateY(-4px)' : 'none'
+                                        }}
                                     >
-                                        POS Integration
-                                    </button>
-                                    <button
-                                        type="button"
-                                        className={formData.priceMode === 'MANUAL' ? 'btn-active' : 'btn-outline'}
+                                        <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+                                            <span style={{ fontSize: '28px' }}>⚡</span>
+                                            <div style={{
+                                                width: '20px',
+                                                height: '20px',
+                                                borderRadius: '50%',
+                                                border: '2px solid rgba(255,255,255,0.2)',
+                                                display: 'flex',
+                                                alignItems: 'center',
+                                                justifyContent: 'center',
+                                                background: formData.priceMode === 'POS' ? 'var(--color-primary)' : 'transparent'
+                                            }}>
+                                                {formData.priceMode === 'POS' && <div style={{ width: '8px', height: '8px', borderRadius: '50%', background: '#000' }} />}
+                                            </div>
+                                        </div>
+                                        <h4 style={{ margin: 0, fontSize: '18px', fontWeight: '900', color: formData.priceMode === 'POS' ? 'var(--color-primary)' : '#fff' }}>POS Sync</h4>
+                                        <p style={{ margin: 0, fontSize: '13px', color: '#999', lineHeight: '1.5' }}>
+                                            Auto-sync prices from your Petpooja or Posist system.
+                                        </p>
+                                    </div>
+
+                                    {/* MANUAL Card */}
+                                    <div
+                                        className={`mode-card ${formData.priceMode === 'MANUAL' ? 'selected' : ''}`}
                                         onClick={() => setFormData({ ...formData, priceMode: 'MANUAL' })}
-                                        style={{ flex: 1, padding: '10px', borderRadius: '8px', cursor: 'pointer', border: '1px solid #ddd' }}
+                                        style={{
+                                            padding: '24px',
+                                            borderRadius: '20px',
+                                            border: formData.priceMode === 'MANUAL' ? '2px solid var(--color-primary)' : '1px solid rgba(255,255,255,0.1)',
+                                            background: '#000',
+                                            color: '#fff',
+                                            cursor: 'pointer',
+                                            transition: 'all 0.3s cubic-bezier(0.4, 0, 0.2, 1)',
+                                            display: 'flex',
+                                            flexDirection: 'column',
+                                            gap: '12px',
+                                            boxShadow: formData.priceMode === 'MANUAL' ? '0 0 20px rgba(250, 204, 21, 0.15)' : 'none',
+                                            transform: formData.priceMode === 'MANUAL' ? 'translateY(-4px)' : 'none'
+                                        }}
                                     >
-                                        Manual Entry
-                                    </button>
+                                        <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+                                            <span style={{ fontSize: '28px' }}>📝</span>
+                                            <div style={{
+                                                width: '20px',
+                                                height: '20px',
+                                                borderRadius: '50%',
+                                                border: '2px solid rgba(255,255,255,0.2)',
+                                                display: 'flex',
+                                                alignItems: 'center',
+                                                justifyContent: 'center',
+                                                background: formData.priceMode === 'MANUAL' ? 'var(--color-primary)' : 'transparent'
+                                            }}>
+                                                {formData.priceMode === 'MANUAL' && <div style={{ width: '8px', height: '8px', borderRadius: '50%', background: '#000' }} />}
+                                            </div>
+                                        </div>
+                                        <h4 style={{ margin: 0, fontSize: '18px', fontWeight: '900', color: formData.priceMode === 'MANUAL' ? 'var(--color-primary)' : '#fff' }}>Manual Entry</h4>
+                                        <p style={{ margin: 0, fontSize: '13px', color: '#999', lineHeight: '1.5' }}>
+                                            Enter prices yourself for each item you upload.
+                                        </p>
+                                    </div>
                                 </div>
                             </div>
 

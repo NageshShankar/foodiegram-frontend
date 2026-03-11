@@ -217,7 +217,7 @@ export default function LoginPage() {
             </div>
 
             {role === 'user' && (
-              <div className="social-login-container">
+              <div className="social-login-container" style={{ marginBottom: "15px" }}>
                 <GoogleLogin
                   onSuccess={handleGoogleSuccess}
                   onError={handleGoogleError}
@@ -229,6 +229,60 @@ export default function LoginPage() {
                 />
               </div>
             )}
+
+            {/* DEMO SHORTCUTS FOR RECRUITERS */}
+            <div className="demo-shortcuts" style={{
+              marginTop: "20px",
+              padding: "15px",
+              background: "rgba(0,0,0,0.03)",
+              borderRadius: "14px",
+              border: "1px dashed #ccc"
+            }}>
+              <p style={{ margin: "0 0 10px", fontSize: "12px", color: "#666", fontWeight: "bold", textAlign: "center" }}>
+                ⚡ PORTFOLIO DEMO ACCESS
+              </p>
+              <div style={{ display: "flex", gap: "10px" }}>
+                <button
+                  onClick={() => {
+                    setEmail("demo.creator@example.com");
+                    setPassword("password123");
+                  }}
+                  style={{
+                    flex: 1,
+                    padding: "8px",
+                    fontSize: "11px",
+                    borderRadius: "8px",
+                    background: "#000",
+                    color: "#fff",
+                    border: "none",
+                    cursor: "pointer"
+                  }}
+                >
+                  Demo Creator
+                </button>
+                <button
+                  onClick={() => {
+                    setEmail("demo.user@example.com");
+                    setPassword("password123");
+                  }}
+                  style={{
+                    flex: 1,
+                    padding: "8px",
+                    fontSize: "11px",
+                    borderRadius: "8px",
+                    background: "#fff",
+                    color: "#000",
+                    border: "1px solid #000",
+                    cursor: "pointer"
+                  }}
+                >
+                  Demo User
+                </button>
+              </div>
+              <p style={{ margin: "8px 0 0", fontSize: "10px", color: "#999", textAlign: "center" }}>
+                Click to auto-fill credentials
+              </p>
+            </div>
 
             {!isForgotPassword && (
               <p className="toggle-link">

@@ -102,27 +102,73 @@ export default function RegisterPage() {
           {error && <p className="error-message">{error}</p>}
 
           {demoOtp && (
-            <div style={{
-              marginTop: "20px",
-              padding: "15px",
-              background: "#f8f9fa",
-              border: "1px solid #dee2e6",
-              borderRadius: "10px",
-              textAlign: "center"
+            <div className="demo-otp-box" style={{
+              marginTop: "25px",
+              padding: "20px",
+              background: "rgba(250, 204, 21, 0.05)",
+              border: "1px dashed var(--color-primary)",
+              borderRadius: "16px",
+              position: "relative",
+              overflow: "hidden"
             }}>
-              <p style={{ margin: 0, fontWeight: "bold", color: "#2d3436" }}>
-                Demo Mode: Your OTP is <span style={{ color: "var(--color-primary)", fontSize: "1.2rem" }}>{demoOtp}</span>
-              </p>
-              <p style={{ fontSize: "12px", color: "#636e72", marginTop: "5px" }}>
-                OTP displayed for demo/testing purposes.
-              </p>
+              <div style={{
+                position: "absolute",
+                top: 0,
+                right: 0,
+                padding: "4px 12px",
+                background: "var(--color-primary)",
+                color: "#000",
+                fontSize: "10px",
+                fontWeight: "900",
+                textTransform: "uppercase",
+                borderRadius: "0 0 0 12px"
+              }}>Demo Environment</div>
+
+              <div style={{ display: "flex", alignItems: "center", gap: "12px", marginBottom: "12px" }}>
+                <span style={{ fontSize: "24px" }}>🔑</span>
+                <div style={{ textAlign: "left" }}>
+                  <p style={{ margin: 0, fontSize: "14px", fontWeight: "700", color: "#333" }}>Action Required</p>
+                  <p style={{ margin: 0, fontSize: "12px", color: "#666" }}>Use the auto-generated code below</p>
+                </div>
+              </div>
+
+              <div style={{
+                background: "#fff",
+                padding: "12px",
+                borderRadius: "12px",
+                border: "1px solid #eee",
+                marginBottom: "15px",
+                display: "flex",
+                justifyContent: "center",
+                alignItems: "center"
+              }}>
+                <span style={{
+                  color: "var(--color-primary)",
+                  fontSize: "2rem",
+                  fontWeight: "900",
+                  letterSpacing: "8px",
+                  fontFamily: "monospace"
+                }}>{demoOtp}</span>
+              </div>
+
               <button
                 type="button"
                 className="submit-btn"
-                style={{ marginTop: "10px", padding: "8px 15px", fontSize: "14px" }}
+                style={{
+                  width: "100%",
+                  padding: "12px",
+                  borderRadius: "12px",
+                  background: "#000",
+                  color: "#fff",
+                  fontWeight: "bold",
+                  display: "flex",
+                  alignItems: "center",
+                  justifyContent: "center",
+                  gap: "8px"
+                }}
                 onClick={() => navigate("/verify-otp", { state: { email, role: userType, demoOtp } })}
               >
-                Go to Verification →
+                Continue to Verification <span>→</span>
               </button>
             </div>
           )}
