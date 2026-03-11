@@ -399,6 +399,30 @@ export default function CreatorProfilePage() {
               {profileUser.bio && <p className="profile-bio">{profileUser.bio}</p>}
               {restaurant?.description && <p className="profile-description">{restaurant.description}</p>}
 
+              {/* ACCOUNT VERIFIED BANNER (DEMO MODE) */}
+              {isOwnProfile && user?.role === "CREATOR" && user?.isAdminVerified && (
+                <div className="verification-banner-v2" style={{
+                  background: 'linear-gradient(135deg, #064e3b 0%, #065f46 100%)',
+                  border: '1px solid #10b981',
+                  borderRadius: '14px',
+                  padding: '16px 20px',
+                  marginTop: '20px',
+                  display: 'flex',
+                  alignItems: 'flex-start',
+                  gap: '14px'
+                }}>
+                  <span style={{ fontSize: '28px', lineHeight: 1 }}>✅</span>
+                  <div>
+                    <h3 style={{ margin: '0 0 4px', color: '#10b981', fontSize: '15px', fontWeight: '800' }}>
+                      Verified by Admin
+                    </h3>
+                    <p style={{ margin: 0, color: '#ecfdf5', opacity: 0.9, fontSize: '13px', lineHeight: '1.5' }}>
+                      Your account is verified! You can now upload reels and manage your restaurant profile.
+                    </p>
+                  </div>
+                </div>
+              )}
+
               {/* ADMIN VERIFICATION PENDING BANNER */}
               {isOwnProfile && isUnverifiedCreator && (
                 <div className="verification-banner-v2" style={{

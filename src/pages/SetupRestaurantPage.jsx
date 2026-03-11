@@ -68,8 +68,9 @@ export default function SetupRestaurantPage() {
                 headers: { 'Content-Type': 'multipart/form-data' }
             });
 
-            if (response.data.nextStep === 'VERIFICATION_PENDING') {
-                navigate('/profile');
+            if (response.data.nextStep === 'VERIFICATION_PENDING' || response.data.nextStep === 'READY') {
+                const profileId = user.id || user._id;
+                navigate(`/creator/${profileId}`);
             }
         } catch (err) {
             setError(err.response?.data?.message || "Failed to submit restaurant details");
