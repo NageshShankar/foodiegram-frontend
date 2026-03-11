@@ -110,16 +110,6 @@ export default function LoginPage() {
       <div className="bg-glow-1"></div>
       <div className="bg-glow-2"></div>
 
-      {/* BRAND MARQUEE BACKGROUND */}
-      <div className="brand-marquee-container">
-        <div className="marquee-content">
-          <span>FOODIEGRAM</span>
-          <span>FOODIEGRAM</span>
-          <span>FOODIEGRAM</span>
-          <span>FOODIEGRAM</span>
-        </div>
-      </div>
-
       {/* LEFT SIDE - BRAND SHOWCASE */}
       <div className="left-section">
         <div className="food-showcase">
@@ -133,7 +123,7 @@ export default function LoginPage() {
             alt="Premium Dish 2"
             className="food-image food-image-2"
           />
-          <div className="brand-badge">EST. 2024</div>
+          <div className="brand-badge">FOODIEGRAM</div>
         </div>
       </div>
 
