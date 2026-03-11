@@ -10,7 +10,10 @@ import "../styles/CreatorProfile.css";
 export default function CreatorProfilePage() {
   const { id } = useParams();
   const navigate = useNavigate();
-  const { user } = useAuth();
+  const { user, refreshUser } = useAuth();
+
+  const isUnverifiedCreator = user?.role === "CREATOR" && !user?.isAdminVerified;
+
 
   const [profileUser, setProfileUser] = useState(null);
   const [loading, setLoading] = useState(true);
@@ -68,7 +71,8 @@ export default function CreatorProfilePage() {
         });
 
         // If it's own profile, fetch status
-        if (user && (user.id === id || user._id === id)) {
+        const isOwn = user && (String(user.id) === String(id) || String(user._id) === String(id));
+        if (isOwn) {
           const statusRes = await api.get('/creators/profile-status');
           setProfileStatus(statusRes.data.data);
         }
@@ -84,7 +88,7 @@ export default function CreatorProfilePage() {
           likesCount: r.likes?.length || 0,
           comments: r.comments || [],
           dishName: r.foodName || r.caption,
-          status: r.priceStatus // Added for visibility
+          status: r.priceStatus
         })));
 
       } catch (err) {
@@ -94,30 +98,42 @@ export default function CreatorProfilePage() {
         setLoading(false);
       }
     };
+
     fetchData();
 
-    // Check if following
+    // Force body scroll to be enabled for this page
+    document.body.style.overflow = "auto";
+    document.documentElement.style.overflow = "auto";
+  }, [id]); // Only refetch when ID changes
+
+  // Separate effect for refreshUser to avoid loop
+  useEffect(() => {
+    const syncUser = async () => {
+      if (user && (String(user.id) === String(id) || String(user._id) === String(id))) {
+        await refreshUser();
+      }
+    };
+    syncUser();
+  }, [id]); // Only sync when profile ID changes
+
+  // Separate effect for following status
+  useEffect(() => {
     const checkFollow = async () => {
-      if (!user) return;
+      const restaurantId = profileUser?.restaurant?._id || profileUser?.restaurant?.id;
+      if (!user || !restaurantId) return;
+
       try {
         const res = await api.get(`/users/${user.id || user._id}/following`);
         const following = res.data.data || [];
-        const isFollowingProfile = following.some(f => (f._id || f.id) === profileUser?.restaurant?._id || (f._id || f.id) === profileUser?.restaurant?.id);
+        const isFollowingProfile = following.some(f => (f._id || f.id) === restaurantId);
         setIsFollowing(isFollowingProfile);
       } catch (err) {
         console.error("Check follow error:", err);
       }
     };
-    if (profileUser) checkFollow();
 
-    // Force body scroll to be enabled for this page
-    document.body.style.overflow = "auto";
-    document.documentElement.style.overflow = "auto";
-
-    return () => {
-      // Optional: Reset if needed when leaving
-    };
-  }, [id, user, profileUser?.restaurant?._id]);
+    checkFollow();
+  }, [user?.id, profileUser?.restaurant?._id]); // Run when user or the target restaurant changes
 
   useEffect(() => {
     if (profileUser) {
@@ -341,8 +357,8 @@ export default function CreatorProfilePage() {
             </div>
 
             <div className="profile-info">
-              <div className="profile-top">
-                <div className="profile-name-section">
+              <div className="profile-name-section">
+                <div className="profile-name-row">
                   <h1 className="profile-name">
                     {profileUser.name}
                     {profileUser.verificationStatus === 'APPROVED' && (
@@ -351,20 +367,20 @@ export default function CreatorProfilePage() {
                       </span>
                     )}
                   </h1>
-                  <span className="profile-username">@{profileUser.username}</span>
+                  <div className="profile-actions-header">
+                    {isOwnProfile ? (
+                      <button className="edit-btn" onClick={handleOpenEdit}>Edit Profile</button>
+                    ) : (
+                      <button
+                        className={`follow-btn ${isFollowing ? 'following' : ''}`}
+                        onClick={handleFollowClick}
+                      >
+                        {isFollowing ? "Following" : "Follow"}
+                      </button>
+                    )}
+                  </div>
                 </div>
-                <div className="profile-actions-header">
-                  {isOwnProfile ? (
-                    <button className="edit-btn" onClick={handleOpenEdit}>Edit Profile</button>
-                  ) : (
-                    <button
-                      className={`follow-btn ${isFollowing ? 'following' : ''}`}
-                      onClick={handleFollowClick}
-                    >
-                      {isFollowing ? "Following" : "Follow"}
-                    </button>
-                  )}
-                </div>
+                <span className="profile-username">@{profileUser.username}</span>
               </div>
 
               <div className="profile-stats">
@@ -383,8 +399,33 @@ export default function CreatorProfilePage() {
               {profileUser.bio && <p className="profile-bio">{profileUser.bio}</p>}
               {restaurant?.description && <p className="profile-description">{restaurant.description}</p>}
 
-              {/* PART H - STATUS RENDERING */}
-              {isOwnProfile && profileStatus?.verificationStatus === 'PENDING' && (
+              {/* ADMIN VERIFICATION PENDING BANNER */}
+              {isOwnProfile && isUnverifiedCreator && (
+                <div className="verification-banner-v2" style={{
+                  background: 'linear-gradient(135deg, #1c1400 0%, #2a1d00 100%)',
+                  border: '1px solid #FACC15',
+                  borderRadius: '14px',
+                  padding: '16px 20px',
+                  marginTop: '20px',
+                  display: 'flex',
+                  alignItems: 'flex-start',
+                  gap: '14px'
+                }}>
+                  <span style={{ fontSize: '28px', lineHeight: 1 }}>⏳</span>
+                  <div>
+                    <h3 style={{ margin: '0 0 4px', color: '#FACC15', fontSize: '15px', fontWeight: '800' }}>
+                      Account Under Verification
+                    </h3>
+                    <p style={{ margin: 0, color: '#FACC15', opacity: 0.8, fontSize: '13px', lineHeight: '1.5' }}>
+                      This may take <strong>1–2 hours</strong>. You can browse reels, but uploading is disabled until approval.
+                    </p>
+                  </div>
+                </div>
+              )}
+
+
+              {/* PART H - RESTAURANT VERIFICATION STATUS */}
+              {isOwnProfile && !(user?.role === 'CREATOR' && user?.isAdminVerified === false) && profileStatus?.verificationStatus === 'PENDING' && (
                 <div className="verification-banner" style={{ background: '#fef9c3', border: '1px solid #facc15', padding: '15px', borderRadius: '12px', marginTop: '20px' }}>
                   <div className="verification-content" style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
                     <span style={{ fontSize: '24px' }}>⏳</span>
@@ -422,9 +463,26 @@ export default function CreatorProfilePage() {
 
                   {profileStatus?.nextStep === 'READY' && (
                     <div className="ready-actions" style={{ marginTop: '20px' }}>
-                      <button className="btn-primary" onClick={() => navigate('/upload')} style={{ padding: '12px 30px', background: 'var(--color-primary)', color: 'white', border: 'none', borderRadius: '8px', fontWeight: 'bold', cursor: 'pointer' }}>+ Upload New Reel</button>
+                      <button
+                        className="btn-primary"
+                        onClick={() => !isUnverifiedCreator && navigate('/upload')}
+                        disabled={isUnverifiedCreator}
+                        style={{
+                          padding: '12px 30px',
+                          background: isUnverifiedCreator ? '#333' : 'var(--color-primary)',
+                          color: isUnverifiedCreator ? '#666' : 'white',
+                          border: 'none',
+                          borderRadius: '8px',
+                          fontWeight: 'bold',
+                          cursor: isUnverifiedCreator ? 'not-allowed' : 'pointer',
+                          opacity: isUnverifiedCreator ? 0.6 : 1
+                        }}
+                      >
+                        {isUnverifiedCreator ? "Available after verification" : "+ Upload New Reel"}
+                      </button>
                     </div>
                   )}
+
                 </>
               )}
             </div>
@@ -465,8 +523,19 @@ export default function CreatorProfilePage() {
                 ) : (
                   <div className="no-posts">
                     <p>No posts yet. Start your journey by uploading your first reel!</p>
-                    <button className="btn-primary" onClick={() => navigate('/upload')}>Upload Reel</button>
+                    <button
+                      className="btn-primary"
+                      onClick={() => !isUnverifiedCreator && navigate('/upload')}
+                      disabled={isUnverifiedCreator}
+                      style={{
+                        opacity: isUnverifiedCreator ? 0.6 : 1,
+                        cursor: isUnverifiedCreator ? 'not-allowed' : 'pointer'
+                      }}
+                    >
+                      {isUnverifiedCreator ? "Upload disabled until verification" : "Upload Reel"}
+                    </button>
                   </div>
+
                 )}
               </div>
             ) : activeTab === 'AMBIENCE' ? (
@@ -666,26 +735,37 @@ export default function CreatorProfilePage() {
               </div>
               <div className="modal-body-scroll users-list">
                 {modalLoading ? (
-                  <div className="modal-loading">Loading...</div>
+                  <div className="modal-loading">
+                    <div className="loading-spinner-small"></div>
+                    <span>Fetching users...</span>
+                  </div>
                 ) : (
                   <div className="users-grid">
                     {(showFollowersModal ? followersList : followingList).map(u => (
                       <div key={u._id || u.id} className="user-row" onClick={() => { navigate(`/creator/${u._id || u.id}`); setShowFollowersModal(false); setShowFollowingModal(false); }}>
-                        <div className="user-avatar-small">
-                          {u.profileImage ? (
-                            <img src={getAssetUrl(u.profileImage)} alt="" />
-                          ) : (
-                            <span>{(u.username || u.name || "A")[0].toUpperCase()}</span>
-                          )}
+                        <div className="user-item-content">
+                          <div className="user-avatar-small">
+                            {u.profileImage ? (
+                              <img src={getAssetUrl(u.profileImage)} alt="" />
+                            ) : (
+                              <span>{(u.username || u.name || "A")[0].toUpperCase()}</span>
+                            )}
+                          </div>
+                          <div className="user-info-small">
+                            <span className="user-username-small">@{u.username || u.name}</span>
+                            <span className="user-name-small">{u.name || u.restaurantName}</span>
+                          </div>
                         </div>
-                        <div className="user-info-small">
-                          <span className="user-username-small">@{u.username || u.name}</span>
-                          <span className="user-name-small">{u.name || u.restaurantName}</span>
+                        <div className="user-row-actions">
+                          <span>→</span>
                         </div>
                       </div>
                     ))}
                     {(showFollowersModal ? followersList : followingList).length === 0 && (
-                      <div className="empty-list">No users found</div>
+                      <div className="empty-list">
+                        <div className="empty-list-icon">👥</div>
+                        <p>No users found here.</p>
+                      </div>
                     )}
                   </div>
                 )}

@@ -2,62 +2,82 @@ const reelsData = [
   {
     id: 1,
     creatorId: "r1",
-    creatorName: "burger_house",
-    dishName: "Double Cheese Burger",
-    thumbnail: "https://images.pexels.com/photos/1639557/pexels-photo-1639557.jpeg?auto=compress&cs=tinysrgb&w=600",
-    priceBase: 199,
+    creatorName: "biryani_center",
+    dishName: "Special Chicken Biryani",
+    thumbnail: "https://images.pexels.com/photos/1624487/pexels-photo-1624487.jpeg?auto=compress&cs=tinysrgb&w=600",
+    priceBase: 249,
     deliveryOptions: [
-      { appName: "Swiggy", price: 199, rating: 4.5 },
-      { appName: "Zomato", price: 189, rating: 4.3 },
-      { appName: "Blinkit", price: 210, rating: 4.1 }
+      { appName: "Swiggy", price: 249, rating: 4.5 },
+      { appName: "Zomato", price: 229, rating: 4.3 },
+      { appName: "Blinkit", price: 260, rating: 4.1 }
     ],
-    videoSrc: "https://videos.pexels.com/video-files/3209828/3209828-uhd_2560_1440_25fps.mp4",
-    bgImage: "https://images.pexels.com/photos/1639557/pexels-photo-1639557.jpeg?auto=compress&cs=tinysrgb&w=600",
-    username: "burgerfan",
+    videoSrc: "/uploads/reels/1770685331430-biryani video.mp4",
+    bgImage: "https://images.pexels.com/photos/1624487/pexels-photo-1624487.jpeg?auto=compress&cs=tinysrgb&w=600",
+    username: "biryanifan",
     avatarColor: "#3357ff",
-    description: "Burger feast at Burger Joint!",
-    bio: "Burger enthusiast exploring the best bites around town.",
-    followers: 950
+    description: "Aromatic and flavorful chicken biryani! 🍛",
+    bio: "Biryani lover on a mission to find the best grains.",
+    followers: 1500
   },
   {
     id: 2,
     creatorId: "r2",
-    creatorName: "pizza_palace",
-    dishName: "Margherita Pizza",
-    thumbnail: "https://images.pexels.com/photos/708587/pexels-photo-708587.jpeg?auto=compress&cs=tinysrgb&w=600",
-    priceBase: 299,
+    creatorName: "shawarma_king",
+    dishName: "Classic Chicken Shawarma",
+    thumbnail: "https://images.pexels.com/photos/461198/pexels-photo-461198.jpeg?auto=compress&cs=tinysrgb&w=600",
+    priceBase: 120,
     deliveryOptions: [
-      { appName: "Swiggy", price: 299, rating: 4.7 },
-      { appName: "Zomato", price: 289, rating: 4.4 },
-      { appName: "Blinkit", price: 310, rating: 4.2 }
+      { appName: "Swiggy", price: 120, rating: 4.7 },
+      { appName: "Zomato", price: 110, rating: 4.4 },
+      { appName: "Blinkit", price: 130, rating: 4.2 }
     ],
-    videoSrc: "https://videos.pexels.com/video-files/3209813/3209813-uhd_2560_1440_25fps.mp4",
-    bgImage: "https://images.pexels.com/photos/708587/pexels-photo-708587.jpeg?auto=compress&cs=tinysrgb&w=600",
-    username: "foodie1",
+    videoSrc: "/uploads/reels/1770700511614-shawrmavdieo.mp4",
+    bgImage: "https://images.pexels.com/photos/461198/pexels-photo-461198.jpeg?auto=compress&cs=tinysrgb&w=600",
+    username: "shawarmalover",
     avatarColor: "#ff5733",
-    description: "Delicious pizza from Pizza Palace!",
-    bio: "Passionate foodie sharing delicious recipes and restaurant reviews.",
-    followers: 1200
+    description: "Deliciously wrapped chicken shawarma. 🌯",
+    bio: "Wrapped in flavor, sharing the best street food.",
+    followers: 2200
   },
   {
     id: 3,
     creatorId: "r3",
-    creatorName: "salad_chef",
-    dishName: "Caesar Salad",
+    creatorName: "wrap_it_up",
+    dishName: "Grilled Bottle Wrap",
     thumbnail: "https://images.pexels.com/photos/1213710/pexels-photo-1213710.jpeg?auto=compress&cs=tinysrgb&w=600",
-    priceBase: 149,
+    priceBase: 180,
     deliveryOptions: [
-      { appName: "Swiggy", price: 149, rating: 4.2 },
-      { appName: "Zomato", price: 139, rating: 4.0 },
-      { appName: "Blinkit", price: 160, rating: 3.9 }
+      { appName: "Swiggy", price: 180, rating: 4.2 },
+      { appName: "Zomato", price: 170, rating: 4.0 },
+      { appName: "Blinkit", price: 195, rating: 3.9 }
     ],
-    videoSrc: "https://videos.pexels.com/video-files/3209825/3209825-uhd_2560_1440_25fps.mp4",
+    videoSrc: "/uploads/reels/1770885704161-bottlewrap vdieo.mp4",
     bgImage: "https://images.pexels.com/photos/1213710/pexels-photo-1213710.jpeg?auto=compress&cs=tinysrgb&w=600",
-    username: "chef2",
+    username: "healthyeats",
     avatarColor: "#33ff57",
-    description: "Fresh salad at Green Eats.",
-    bio: "Professional chef creating healthy and tasty meals.",
-    followers: 850
+    description: "Fresh and healthy grilled vegetable wrap. 🥗",
+    bio: "Healthy food can be tasty too! Follow for recipes.",
+    followers: 950
+  },
+  {
+    id: 4,
+    creatorId: "r4",
+    creatorName: "mutton_master",
+    dishName: "Mutton Biryani",
+    thumbnail: "https://images.pexels.com/photos/1624487/pexels-photo-1624487.jpeg?auto=compress&cs=tinysrgb&w=600",
+    priceBase: 349,
+    deliveryOptions: [
+      { appName: "Swiggy", price: 349, rating: 4.8 },
+      { appName: "Zomato", price: 329, rating: 4.6 },
+      { appName: "Blinkit", price: 370, rating: 4.5 }
+    ],
+    videoSrc: "/uploads/reels/1771533214784-biryani video.mp4",
+    bgImage: "https://images.pexels.com/photos/1624487/pexels-photo-1624487.jpeg?auto=compress&cs=tinysrgb&w=600",
+    username: "muttonlover",
+    avatarColor: "#ff33a8",
+    description: "Rich and spicy mutton biryani. 🍛",
+    bio: "Traditional mutton recipes handed down through generations.",
+    followers: 3100
   }
 ];
 

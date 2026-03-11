@@ -6,18 +6,25 @@ import '../styles/OnboardingPage.css';
 
 export default function VerificationPendingPage() {
     const navigate = useNavigate();
-    const { user } = useAuth();
+    const { user, refreshUser } = useAuth();
+
 
     React.useEffect(() => {
-        const timer = setTimeout(() => {
+        const checkStatus = async () => {
             if (user) {
-                navigate(`/creator/${user.id || user._id}`);
-            } else {
-                navigate('/home');
+                const refreshed = await refreshUser();
+                if (refreshed && refreshed.isAdminVerified) {
+                    navigate(`/creator/${refreshed.id || refreshed._id}`);
+                }
             }
-        }, 5000);
+        };
+
+        const timer = setTimeout(() => {
+            checkStatus();
+        }, 3000); // Check after 3 seconds
         return () => clearTimeout(timer);
-    }, [navigate, user]);
+    }, [navigate, user, refreshUser]);
+
 
     return (
         <div className="onboarding-layout-wrapper" style={{ display: 'flex' }}>

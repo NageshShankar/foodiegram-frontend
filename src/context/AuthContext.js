@@ -32,7 +32,7 @@ export const AuthProvider = ({ children }) => {
       localStorage.setItem("user", JSON.stringify(loggedInUser));
       setUser(loggedInUser);
 
-      return { success: true, nextStep };
+      return { success: true, nextStep, user: loggedInUser };
     } catch (error) {
       console.error("Login error:", error);
       return {
@@ -57,7 +57,12 @@ export const AuthProvider = ({ children }) => {
       const response = await api.post('/auth/register', payload);
 
       if (response.data.status === 'pending') {
-        return { success: true, pending: true, email: response.data.email };
+        return {
+          success: true,
+          pending: true,
+          email: response.data.email,
+          demoOtp: response.data.demoOtp // Captured for demo mode
+        };
       }
 
       return { success: true };
@@ -92,7 +97,7 @@ export const AuthProvider = ({ children }) => {
       localStorage.setItem("user", JSON.stringify(loggedInUser));
       setUser(loggedInUser);
 
-      return { success: true, nextStep };
+      return { success: true, nextStep, user: loggedInUser };
     } catch (error) {
       console.error("Google Login error:", error);
       return {
@@ -149,7 +154,22 @@ export const AuthProvider = ({ children }) => {
   };
 
 
+  const refreshUser = async () => {
+    try {
+      const response = await api.get('/auth/me');
+      const updatedUser = response.data.user;
+      localStorage.setItem("user", JSON.stringify(updatedUser));
+      setUser(updatedUser);
+      return updatedUser;
+    } catch (error) {
+      console.error("Refresh user error:", error);
+      return null;
+    }
+  };
+
+
   const value = {
+
     user,
     isLoggedIn: !!user,
     loading,
@@ -159,8 +179,10 @@ export const AuthProvider = ({ children }) => {
     googleLogin,
     forgotPassword,
     resetPassword,
+    refreshUser,
     logout,
   };
+
 
   return (
     <AuthContext.Provider value={value}>

@@ -31,13 +31,21 @@ export default function LoginPage() {
     }
     const result = await login(email, password);
     if (result.success) {
+      const loggedUser = result.user;
+
       if (result.nextStep === "RESTAURANT_DETAILS") {
         navigate("/creator/setup-restaurant");
       } else if (result.nextStep === "VERIFICATION_PENDING") {
         navigate("/creator/verification-pending");
+      } else if (
+        loggedUser?.role === "CREATOR" &&
+        loggedUser?.isAdminVerified === false
+      ) {
+        navigate("/profile");
       } else {
         navigate("/home");
       }
+
     } else {
       setMessage(result.error);
     }
@@ -67,13 +75,21 @@ export default function LoginPage() {
 
       const result = await googleLogin(credentialResponse.credential);
       if (result.success) {
+        const loggedUser = result.user;
+
         if (result.nextStep === "RESTAURANT_DETAILS") {
           navigate("/creator/setup-restaurant");
         } else if (result.nextStep === "VERIFICATION_PENDING") {
           navigate("/creator/verification-pending");
+        } else if (
+          loggedUser?.role === "CREATOR" &&
+          loggedUser?.isAdminVerified === false
+        ) {
+          navigate("/profile");
         } else {
           navigate("/home");
         }
+
       } else {
         setMessage(result.error);
       }

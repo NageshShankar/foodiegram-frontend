@@ -24,14 +24,15 @@ const restaurantsData = [
   },
   {
     id: 3,
-    name: "Taco Town",
-    rating: 4.2,
+    name: "Biryani Center",
+    rating: 4.7,
     distance: "1.5km",
-    platforms: ["Swiggy"],
+    platforms: ["Zomato", "Swiggy"],
     deliveryApps: [
-      { logo: "https://logos-world.net/wp-content/uploads/2020/11/Swiggy-Logo.png", rating: "4.2" }
+      { logo: "https://logos-world.net/wp-content/uploads/2020/11/Zomato-Logo.png", rating: "4.6" },
+      { logo: "https://logos-world.net/wp-content/uploads/2020/11/Swiggy-Logo.png", rating: "4.7" }
     ],
-    image: "https://images.pexels.com/photos/461198/pexels-photo-461198.jpeg?auto=compress&cs=tinysrgb&w=600"
+    image: "https://images.pexels.com/photos/1624487/pexels-photo-1624487.jpeg?auto=compress&cs=tinysrgb&w=600"
   },
   {
     id: 4,

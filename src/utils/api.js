@@ -3,6 +3,7 @@ import config from '../config';
 
 const api = axios.create({
     baseURL: config.API_BASE_URL,
+    withCredentials: true
 });
 
 // Add a request interceptor to include JWT token
@@ -15,3 +16,4 @@ api.interceptors.request.use((config) => {
 });
 
 export default api;
+

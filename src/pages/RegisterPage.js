@@ -15,6 +15,7 @@ export default function RegisterPage() {
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
   const [error, setError] = useState("");
+  const [demoOtp, setDemoOtp] = useState(""); // Demo mode OTP
   const { user, register } = useAuth();
   const navigate = useNavigate();
 
@@ -40,7 +41,11 @@ export default function RegisterPage() {
     const result = await register(fullName, email, username, password, confirmPassword, userType.toUpperCase());
     if (result.success) {
       if (result.pending) {
-        navigate("/verify-otp", { state: { email, role: userType } });
+        if (result.demoOtp) {
+          setDemoOtp(result.demoOtp);
+        } else {
+          navigate("/verify-otp", { state: { email, role: userType } });
+        }
       } else {
         navigate("/home");
       }
@@ -96,10 +101,38 @@ export default function RegisterPage() {
 
           {error && <p className="error-message">{error}</p>}
 
+          {demoOtp && (
+            <div style={{
+              marginTop: "20px",
+              padding: "15px",
+              background: "#f8f9fa",
+              border: "1px solid #dee2e6",
+              borderRadius: "10px",
+              textAlign: "center"
+            }}>
+              <p style={{ margin: 0, fontWeight: "bold", color: "#2d3436" }}>
+                Demo Mode: Your OTP is <span style={{ color: "var(--color-primary)", fontSize: "1.2rem" }}>{demoOtp}</span>
+              </p>
+              <p style={{ fontSize: "12px", color: "#636e72", marginTop: "5px" }}>
+                OTP displayed for demo/testing purposes.
+              </p>
+              <button
+                type="button"
+                className="submit-btn"
+                style={{ marginTop: "10px", padding: "8px 15px", fontSize: "14px" }}
+                onClick={() => navigate("/verify-otp", { state: { email, role: userType, demoOtp } })}
+              >
+                Go to Verification →
+              </button>
+            </div>
+          )}
+
           <div className="auth-actions">
-            <button type="button" className="submit-btn" onClick={handleFinalSubmit}>
-              {userType === 'creator' ? 'Next: Verify Email →' : 'Send Verification OTP'}
-            </button>
+            {!demoOtp && (
+              <button type="button" className="submit-btn" onClick={handleFinalSubmit}>
+                {userType === 'creator' ? 'Next: Verify Email →' : 'Send Verification OTP'}
+              </button>
+            )}
           </div>
         </form>
 

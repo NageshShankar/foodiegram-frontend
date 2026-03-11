@@ -13,6 +13,7 @@ export default function VerifyOtpPage() {
     const [loading, setLoading] = useState(false);
 
     const email = location.state?.email || "";
+    const demoOtp = location.state?.demoOtp || "";
 
     const handleVerify = async (e) => {
         e.preventDefault();
@@ -67,6 +68,21 @@ export default function VerifyOtpPage() {
                                 autoFocus
                             />
                         </div>
+
+                        {demoOtp && (
+                            <div style={{
+                                marginTop: "20px",
+                                padding: "12px",
+                                background: "#f8f9fa",
+                                border: "1px dashed var(--color-primary)",
+                                borderRadius: "8px",
+                                textAlign: "center"
+                            }}>
+                                <p style={{ margin: 0, fontWeight: "bold", fontSize: "14px" }}>
+                                    Demo Mode: Your OTP is <span style={{ color: "var(--color-primary)" }}>{demoOtp}</span>
+                                </p>
+                            </div>
+                        )}
                     </div>
 
                     {error && <p className="error-message">{error}</p>}
@@ -81,7 +97,7 @@ export default function VerifyOtpPage() {
                 <p className="auth-footer">
                     Didn't receive the code? <Link to="/register">Register again</Link>
                 </p>
-            </div>
-        </div>
+            </div >
+        </div >
     );
 }

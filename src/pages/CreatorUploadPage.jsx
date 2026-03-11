@@ -48,7 +48,8 @@ export default function CreatorUploadPage() {
     return <Navigate to="/home" replace />;
   }
 
-  const isVerified = profileStatus?.verificationStatus === 'APPROVED' || profileStatus?.verificationStatus === 'VERIFIED';
+  const isVerified = user?.isAdminVerified;
+
   const isSetupComplete = profileStatus?.setupCompleted === true;
   const isPosMode = profileStatus?.priceMode === 'POS';
   const isManualMode = profileStatus?.priceMode === 'MANUAL';

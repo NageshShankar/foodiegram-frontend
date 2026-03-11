@@ -69,7 +69,7 @@ export default function SetupRestaurantPage() {
             });
 
             if (response.data.nextStep === 'VERIFICATION_PENDING') {
-                navigate('/creator/verification-pending');
+                navigate('/profile');
             }
         } catch (err) {
             setError(err.response?.data?.message || "Failed to submit restaurant details");

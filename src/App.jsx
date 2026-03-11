@@ -19,7 +19,7 @@ import CheckoutPage from "./pages/CheckoutPage";
 import PriceComparison from "./pages/PriceComparison";
 import CartPage from "./pages/CartPage";
 
-// ✅ CREATOR PAGES (ADDED)
+// Creator pages
 import CreatorUploadPage from "./pages/CreatorUploadPage";
 import CreatorProfilePage from "./pages/CreatorProfilePage";
 import SetupRestaurantPage from "./pages/SetupRestaurantPage";
@@ -29,15 +29,16 @@ import VerifyOtpPage from "./pages/VerifyOtpPage";
 import ResetPasswordPage from "./pages/ResetPasswordPage";
 
 import CartPanel from "./components/CartPanel";
-
+import ProfileRedirect from "./components/ProfileRedirect";
 import "./styles/global.css";
+
 
 const CartPanelWrapper = () => {
   const { cartPanelOpen, closeCartPanel } = useContext(CartContext);
   return <CartPanel isOpen={cartPanelOpen} onClose={closeCartPanel} />;
 };
 
-const CLIENT_ID = process.env.REACT_APP_GOOGLE_CLIENT_ID || "1025707736655-placeholder-id.apps.googleusercontent.com"; // User needs to set this in .env
+const CLIENT_ID = process.env.REACT_APP_GOOGLE_CLIENT_ID;
 
 function App() {
   return (
@@ -51,31 +52,33 @@ function App() {
                   <SavedProvider>
                     <Router>
                       <Routes>
-                        {/* Authentication */}
+                        {/* Auth */}
                         <Route path="/" element={<LoginPage />} />
                         <Route path="/login" element={<LoginPage />} />
                         <Route path="/register" element={<RegisterPage />} />
                         <Route path="/verify-otp" element={<VerifyOtpPage />} />
                         <Route path="/reset-password/:token" element={<ResetPasswordPage />} />
 
-                        {/* Main Pages */}
+                        {/* Main Feed — all authenticated users + unverified creators */}
                         <Route path="/home" element={<HomePage />} />
                         <Route path="/search" element={<SearchPage />} />
                         <Route path="/saved" element={<SavedPage />} />
                         <Route path="/cart" element={<CartPage />} />
+                        <Route path="/checkout" element={<CheckoutPage />} />
+                        <Route path="/compare" element={<PriceComparison />} />
 
-                        {/* ✅ CREATOR ROUTES */}
-                        <Route path="/upload" element={<CreatorUploadPage />} />
-                        <Route path="/creator/:id" element={<CreatorProfilePage />} />
+                        {/* Creator onboarding */}
                         <Route path="/creator/setup-restaurant" element={<SetupRestaurantPage />} />
                         <Route path="/creator/verification-pending" element={<VerificationPendingPage />} />
                         <Route path="/pos-setup" element={<PosSetupPage />} />
 
-                        {/* Checkout */}
-                        <Route path="/checkout" element={<CheckoutPage />} />
+                        {/* Profile Redirect */}
+                        <Route path="/profile" element={<ProfileRedirect />} />
 
-                        {/* Price Comparison */}
-                        <Route path="/compare" element={<PriceComparison />} />
+                        {/* Creator features */}
+                        <Route path="/upload" element={<CreatorUploadPage />} />
+                        <Route path="/creator/:id" element={<CreatorProfilePage />} />
+
                       </Routes>
 
                       <CartPanelWrapper />
