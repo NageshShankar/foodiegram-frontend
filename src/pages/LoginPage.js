@@ -110,7 +110,17 @@ export default function LoginPage() {
       <div className="bg-glow-1"></div>
       <div className="bg-glow-2"></div>
 
-      {/* LEFT SIDE - FOOD SHOWCASE */}
+      {/* BRAND MARQUEE BACKGROUND */}
+      <div className="brand-marquee-container">
+        <div className="marquee-content">
+          <span>FOODIEGRAM</span>
+          <span>FOODIEGRAM</span>
+          <span>FOODIEGRAM</span>
+          <span>FOODIEGRAM</span>
+        </div>
+      </div>
+
+      {/* LEFT SIDE - BRAND SHOWCASE */}
       <div className="left-section">
         <div className="food-showcase">
           <img
@@ -123,7 +133,7 @@ export default function LoginPage() {
             alt="Premium Dish 2"
             className="food-image food-image-2"
           />
-          <div className="brand-badge">FOODIEGRAM</div>
+          <div className="brand-badge">EST. 2024</div>
         </div>
       </div>
 
@@ -132,13 +142,7 @@ export default function LoginPage() {
         <div className="form-container">
           <div className="form-content">
             <div className="header-group">
-              <Link to="/home">
-                <img
-                  src="/assets/logo_new.png"
-                  alt="Foodiegram Logo"
-                  className="login-brand-logo"
-                />
-              </Link>
+              <h1 className="form-title">Foodiegram</h1>
             </div>
 
             {/* Role Selector */}
